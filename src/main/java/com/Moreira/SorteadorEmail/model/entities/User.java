@@ -32,15 +32,6 @@ public class User {
 
     //METHODS
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNumeros() {
         return numeros;
     }
@@ -61,7 +52,6 @@ public class User {
         Random r = new Random();
         for (int i = 0; i < 7; i++) {
             numeros+= (String.valueOf(r.nextInt(99))+",");
-            System.out.println(numeros);
         }
         return numeros;
     }
