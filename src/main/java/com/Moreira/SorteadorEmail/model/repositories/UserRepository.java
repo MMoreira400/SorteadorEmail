@@ -3,6 +3,6 @@ package com.Moreira.SorteadorEmail.model.repositories;
 import com.Moreira.SorteadorEmail.model.entities.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserRepository extends PagingAndSortingRepository<Userer,Integer> {
-
+public interface UserRepository extends PagingAndSortingRepository<User,Integer> {
+    public Iterable<User> findByEmail(String email);
 }
