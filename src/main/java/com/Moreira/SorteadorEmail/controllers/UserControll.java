@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(path = "/sortear")
+@RequestMapping(path = "/api")
 public class UserControll {
 
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/{email}")
+    @PostMapping("/sortear/{email}")
     public User sortearnumeros(@PathVariable String email){
         User user = new User(email);
         userRepository.save(user);
         return user;
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/buscar/{email}")
     public Iterable<User> procurarporEmail(@PathVariable String email){
         return userRepository.findByEmailContainingIgnoreCase(email);
     }
