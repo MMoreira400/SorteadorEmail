@@ -1,5 +1,7 @@
 package com.Moreira.SorteadorEmail.model.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,18 +11,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int user_id;
-
+    @NotNull
     String email;
-
-    @OneToMany(mappedBy = "aposta_id")
-    private List<Aposta> apostas;
-
 
     //Constructor
     public User() {
     }
 
-
+    public User(String email) {
+        this.email = email;
+    }
     //METHODS
 
 
@@ -30,14 +30,6 @@ public class User {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
-    }
-
-    public List<Aposta> getApostas() {
-        return apostas;
-    }
-
-    public void setApostas(List<Aposta> apostas) {
-        this.apostas = apostas;
     }
 
     public String getEmail() {
