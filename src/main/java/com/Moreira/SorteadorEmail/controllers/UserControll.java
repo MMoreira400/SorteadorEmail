@@ -14,14 +14,13 @@ public class UserControll {
     UserRepository userRepository;
 
     @PostMapping("/sortear/{email}")
-    public User sortearnumeros(@PathVariable String email){
-        User user = new User(email);
-        userRepository.save(user);
-        return user;
+    public User gerarAposta (@PathVariable String email){
+
+
     }
 
     @GetMapping("/buscar/{email}")
-    public Iterable<User> procurarporEmail(@PathVariable String email){
+    public Iterable<User> findByEmail(@PathVariable String email){
         return userRepository.findByEmailContainingIgnoreCase(email);
     }
 }

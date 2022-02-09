@@ -1,43 +1,43 @@
 package com.Moreira.SorteadorEmail.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.HashSet;
-import java.util.Random;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    int user_id;
+
     String email;
-    String numeros;
+
+    @OneToMany(mappedBy = "aposta_id")
+    private List<Aposta> apostas;
+
 
     //Constructor
     public User() {
     }
 
-    public User(int id, String email, String numeros) {
-        this.id = id;
-        this.email = email;
-        this.numeros = numeros;
-    }
-
-    public User(String email) {
-        this.email = email;
-        this.numeros = this.sortearNumeros();
-    }
 
     //METHODS
 
-    public String getNumeros() {
-        return numeros;
+
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setNumeros(String numeros) {
-        this.numeros = numeros;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public List<Aposta> getApostas() {
+        return apostas;
+    }
+
+    public void setApostas(List<Aposta> apostas) {
+        this.apostas = apostas;
     }
 
     public String getEmail() {
@@ -48,11 +48,5 @@ public class User {
         this.email = email;
     }
 
-    public String sortearNumeros() {
-        Random r = new Random();
-        for (int i = 0; i < 7; i++) {
-            numeros+= (String.valueOf(r.nextInt(99))+",");
-        }
-        return numeros;
-    }
+
 }
