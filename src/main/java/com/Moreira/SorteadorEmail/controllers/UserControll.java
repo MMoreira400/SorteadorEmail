@@ -13,12 +13,12 @@ public class UserControll {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/sortear/{email}")
+  /*  @PostMapping("/sortear/{email}")
     public User gerarAposta (@PathVariable String email){
 
 
     }
-
+*/
     @GetMapping("/buscar/{email}")
     public Iterable<User> findByEmail(@PathVariable String email){
         return userRepository.findByEmailContainingIgnoreCase(email);

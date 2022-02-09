@@ -11,7 +11,7 @@ public class Aposta {
     int aposta_id;
 
     @OneToMany(mappedBy = "numeros_id")
-    List<Numeros_aposta> numerosApostados;
+    List<numerosApostados> numerosApostados;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -20,11 +20,15 @@ public class Aposta {
     public Aposta() {
     }
 
-    public List<Numeros_aposta> getNumerosApostados() {
+    public int getAposta_id() {
+        return aposta_id;
+    }
+
+    public List<com.Moreira.SorteadorEmail.model.entities.numerosApostados> getNumerosApostados() {
         return numerosApostados;
     }
 
-    public void setNumerosApostados(List<Numeros_aposta> numerosApostados) {
+    public void setNumerosApostados(List<com.Moreira.SorteadorEmail.model.entities.numerosApostados> numerosApostados) {
         this.numerosApostados = numerosApostados;
     }
 
