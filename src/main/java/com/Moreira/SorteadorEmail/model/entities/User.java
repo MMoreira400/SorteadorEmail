@@ -9,6 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int user_id;
@@ -24,22 +25,6 @@ public class User {
 
     public User(String email) {
         this.email = email;
-    }
-
-    public User(String email, List<Aposta> apostas) {
-        this.email = email;
-        this.apostas = apostas;
-    }
-
-    //METHODS
-
-
-    public List<Aposta> getApostas() {
-        return apostas;
-    }
-
-    public void setApostas(List<Aposta> apostas) {
-        this.apostas = apostas;
     }
 
     @Override

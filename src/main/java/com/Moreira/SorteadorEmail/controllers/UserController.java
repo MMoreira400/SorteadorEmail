@@ -1,6 +1,7 @@
 package com.Moreira.SorteadorEmail.controllers;
 
-import com.Moreira.SorteadorEmail.DTO.ObjetoGet;
+import com.Moreira.SorteadorEmail.responses.ApostaResponse;
+import com.Moreira.SorteadorEmail.responses.UserResponse;
 import com.Moreira.SorteadorEmail.util.Sorteio;
 import com.Moreira.SorteadorEmail.model.entities.Aposta;
 import com.Moreira.SorteadorEmail.model.entities.User;
@@ -27,18 +28,17 @@ public class UserControll {
 
         Sorteio sorteio = new Sorteio(); //Objeto para sortear
         User user;
-        Aposta aposta = new Aposta(sorteio.sortearNumeros()); //Cria a aposta para cadastrar na lista
-        List<Aposta> apostas = new ArrayList<>();
-
+        Aposta aposta = new Aposta(sorteio.sortearNumeros());
         //Verificar se existe o Email Cadastrado
 
         if(userRepository.existsByEmail(email)){
-            user = userRepository.findByEmailContainingIgnoreCase(email).iterator().next();
-            apostas= user.getApostas();
-            apostas.add(aposta);
+            user = userRepository.findByEmailContainingIgnoreCase(email);
         }else{
-            user = new User(email,apostas);
+            user = new User(email);
         }
+
+        aposta.setUser(user);
+
         apostaRepository.save(aposta);
         userRepository.save(user);
         return aposta;
@@ -49,7 +49,7 @@ public class UserControll {
     }
 
     @GetMapping("/buscar/aposta/{id}")
-    public List<Integer> findByIdAposta(@PathVariable Integer id){
-        return apostaRepository.searchById(id);
+    public Aposta findByIdAposta(@PathVariable Integer id){
+        return apostaRepository.findById(id).orElse(null);
     }
 }
