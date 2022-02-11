@@ -15,7 +15,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping(path = "/api")
-public class UserControll {
+public class UserController {
 
     @Autowired
     UserRepository userRepository;
@@ -24,7 +24,7 @@ public class UserControll {
     ApostaRepository apostaRepository;
 
     @PostMapping("/sortear/{email}")
-    public Aposta gerarAposta (@PathVariable String email){
+    public ApostaResponse gerarAposta (@PathVariable String email){
 
         Sorteio sorteio = new Sorteio(); //Objeto para sortear
         User user;
@@ -40,12 +40,12 @@ public class UserControll {
         aposta.setUser(user);
 
         apostaRepository.save(aposta);
-        userRepository.save(user);
-        return aposta;
+        return new ApostaResponse(aposta);
     }
+
     @GetMapping("/buscar/{email}")
-    public Set findByEmail(@PathVariable String email){
-        return userRepository.serchByEmail(email);
+    public UserResponse findByEmail(@PathVariable String email){
+        return new UserResponse(userRepository.findByEmailContainingIgnoreCase(email));
     }
 
     @GetMapping("/buscar/aposta/{id}")

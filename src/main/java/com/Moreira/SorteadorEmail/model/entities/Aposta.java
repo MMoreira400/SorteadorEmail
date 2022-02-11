@@ -1,26 +1,25 @@
 package com.Moreira.SorteadorEmail.model.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Entity
 @Table(name = "aposta")
 public class Aposta {
 
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-    int aposta_id;
+    int apostaId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")@Transient
-    User user;
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @JoinColumn(name = "aposta_numeros")
     @ElementCollection
-    List<Integer> numeros;
+    private List<Integer> numeros;
 
     public Aposta(int aposta_id, User user, List<Integer> numeros) {
-        this.aposta_id = aposta_id;
+        this.apostaId = aposta_id;
         this.user = user;
         this.numeros = numeros;
     }
@@ -37,8 +36,8 @@ public class Aposta {
         this.numeros = numeros;
     }
 
-    public int getAposta_id() {
-        return aposta_id;
+    public int getApostaId() {
+        return apostaId;
     }
 
 
@@ -48,5 +47,13 @@ public class Aposta {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Integer> getNumeros() {
+        return numeros;
+    }
+
+    public void setNumeros(List<Integer> numeros) {
+        this.numeros = numeros;
     }
 }
